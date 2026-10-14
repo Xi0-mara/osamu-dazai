@@ -1,0 +1,201 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+header {
+    background: linear-gradient(135deg, #0e0e0e, #5edbfa);
+    color: white;
+    text-align: center;
+    padding: 2.5rem 1rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    display: inline-block;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+header h1:hover {
+    transform: scale(1.03);
+    opacity: 0.9;
+}
+
+main {
+    max-width: 800px;
+    margin: 2rem auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+main h2 {
+    color: #2575fc;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5rem;
+}
+
+.galería {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 2rem auto;
+    max-width: 900px;
+    padding: 0 1rem;
+}
+
+.galería img {
+    width: 250px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #5edbfa, #000000);
+    color: #ffffff;
+    margin-top: 3rem;
+    font-size: 0.9rem;
+}
+
+body.modo-oscuro {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+body.modo-oscuro main {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.05);
+}
+.modal-bienvenida {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #0e0e0e, #2575fc);
+    color: white;
+    padding: 25px 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    text-align: center;
+    z-index: 1000;
+    animation: aparecer 0.4s ease-out;
+    max-width: 400px;
+    width: 90%;
+}
+
+.modal-bienvenida h3 {
+    margin-top: 0;
+    color: #5edbfa;
+}
+
+.modal-bienvenida p {
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+}
+
+.modal-bienvenida button {
+    background-color: #5edbfa;
+    color: #000;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.modal-bienvenida button:hover {
+    background-color: #fff;
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.galería-container {
+    position: relative;
+    max-width: 700px;
+    margin: 2rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.galería {
+    display: flex;
+    justify-content: flex-start; 
+    flex-wrap: nowrap;
+    gap: 20px;
+    margin: 2rem auto;
+    max-width: 900px;
+    width: 100%;
+    padding: 10px 0;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+.galería::-webkit-scrollbar {
+    display: none;
+}
+
+.galería img {
+    flex: 0 0 250px;
+    width: 250px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.flecha {
+    background-color: rgba(37, 117, 252, 0.8);
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 10;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: background 0.2s, transform 0.2s;
+    position: absolute;
+}
+
+.flecha:hover {
+    background-color: #2575fc;
+    transform: scale(1.1);
+}
+
+.flecha-izq {
+    left: -25px;
+}
+
+.flecha-der {
+    right: -25px;
+}
