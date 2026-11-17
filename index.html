@@ -1,50 +1,286 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Mi libro favorito</title>
     <link rel="stylesheet" href="style.css">
-    <script>document.documentElement.style.visibility = "hidden";</script>
+
+    
+    <style>
+        .oculto { display: none !important; }
+
+        #pantalla-login {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0e0e0e, #2575fc);
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+        .tarjeta-login {
+            background: white;
+            width: 100%;
+            max-width: 380px;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            box-sizing: border-box;
+            color: #333;
+        }
+        .tarjeta-login h1 { margin: 0; text-align: center; font-size: 1.5rem; letter-spacing: 2px; color: #0e0e0e; }
+        .tarjeta-login .subtitulo { text-align: center; color: #666; margin: 0.3rem 0 1.5rem; }
+        .tarjeta-login label { display: block; font-weight: 600; margin: 0.8rem 0 0.3rem; font-size: 0.9rem; }
+        .tarjeta-login input {
+            width: 100%; padding: 10px 12px; border: 1px solid #ccc;
+            border-radius: 8px; font-size: 1rem; box-sizing: border-box;
+        }
+        .tarjeta-login input:focus { outline: none; border-color: #2575fc; box-shadow: 0 0 0 3px rgba(37, 117, 252, 0.2); }
+        .tarjeta-login button[type=submit] {
+            width: 100%; margin-top: 1.4rem; padding: 11px; background-color: #2575fc;
+            color: white; border: none; border-radius: 20px; font-weight: bold;
+            font-size: 1rem; cursor: pointer;
+        }
+        .tarjeta-login button[type=submit]:disabled { opacity: 0.6; cursor: not-allowed; }
+        .mensaje { margin: 1rem 0 0; text-align: center; font-size: 0.9rem; }
+        .mensaje.error, .mensaje.exito { padding: 10px; border-radius: 8px; }
+        .mensaje.error { background: #fde8e8; color: #b42318; }
+        .mensaje.exito { background: #e6f7ec; color: #146c2e; }
+        .cambiar { text-align: center; margin: 1.2rem 0 0; font-size: 0.9rem; }
+        .cambiar a { color: #2575fc; font-weight: 600; text-decoration: none; }
+
+        .barra-sesion {
+            position: fixed; top: 12px; right: 12px; display: flex; align-items: center;
+            gap: 10px; background: rgba(14, 14, 14, 0.85); color: white;
+            padding: 6px 8px 6px 14px; border-radius: 20px; font-size: 0.85rem; z-index: 900;
+        }
+        .barra-sesion button {
+            background-color: #5edbfa; color: #000; border: none; padding: 6px 12px;
+            border-radius: 14px; font-weight: bold; cursor: pointer;
+        }
+        .barra-sesion button:hover { background-color: #fff; }
+    </style>
 </head>
 <body>
-    <header>
-        <h1> MI LIBRO FAVORITO</h1>
-    </header>
 
-<section class="galería-container">
-    <button class="flecha flecha-izq" id="btn-prev">&#10094;</button>
-    
-    <div class="galería">
-        <img src="img/v10.jfif" alt="Imagen 1">
-        <img src="img/v1.jfif" alt="Imagen 2">
-        <img src="img/v2.webp" alt="Imagen 3">
-        <img src="img/v3.webp" alt="Imagen 4">
-        <img src="img/v4.webp" alt="Imagen 5">
-        <img src="img/v5.webp" alt="Imagen 6">
-        <img src="img/v6.jfif" alt="Imagen 7">
-        <img src="img/v7.jfif" alt="Imagen 8">
-        <img src="img/v8.jfif" alt="Imagen 9">
-        <img src="img/v9.jfif" alt="Imagen 10">
+    <div id="pantalla-login">
+        <div class="tarjeta-login">
+            <h1>MI LIBRO FAVORITO</h1>
+            <p class="subtitulo" id="subtitulo">Inicia sesión para continuar</p>
+
+            <form id="form-login">
+                <label for="login-correo">Correo</label>
+                <input type="email" id="login-correo" placeholder="tucorreo@ejemplo.com" required autocomplete="email">
+
+                <label for="login-clave">Contraseña</label>
+                <input type="password" id="login-clave" placeholder="Tu contraseña" required autocomplete="current-password">
+
+                <button type="submit">Entrar</button>
+            </form>
+
+            <form id="form-registro" class="oculto">
+                <label for="registro-nombre">Nombre</label>
+                <input type="text" id="registro-nombre" placeholder="Tu nombre" required autocomplete="name">
+
+                <label for="registro-correo">Correo</label>
+                <input type="email" id="registro-correo" placeholder="tucorreo@ejemplo.com" required autocomplete="email">
+
+                <label for="registro-clave">Contraseña (mínimo 6 caracteres)</label>
+                <input type="password" id="registro-clave" placeholder="Crea una contraseña" minlength="6" required autocomplete="new-password">
+
+                <button type="submit">Crear cuenta</button>
+            </form>
+
+            <p id="mensaje" class="mensaje"></p>
+
+            <p class="cambiar">
+                <span id="texto-cambiar">¿No tienes cuenta?</span>
+                <a href="#" id="enlace-cambiar">Regístrate</a>
+            </p>
+        </div>
     </div>
 
-    <button class="flecha flecha-der" id="btn-next">&#10095;</button>
-</section>
+    <div id="contenido" class="oculto">
 
-    <main> 
-        <h2>¿Por qué lo es?</h2>
-        <p> Es mi libro favorito porque relata como una persona que no se siente digna de ser un humano, que no comprende a los demás, muestra de una perspectiva diferente las realidades de la sociedad, los comportamientos y demás. </p>
-    </main>
+        <header>
+            <h1> MI LIBRO FAVORITO</h1>
+        </header>
 
-    <footer>
-        <p> CREADO POR: Xiomara Valencia Mosquera. </p>
-        <p>ALIAS: Xiaomi</p>
-    </footer>
+        <section class="galería-container">
+            <button class="flecha flecha-izq" id="btn-prev">&#10094;</button>
 
-       <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-    <script src="config.js"></script>
-    <script src="guardia.js"></script>
-    <script src="Java.js"></script>
+            <div class="galería">
+                <img src="img/v10.jfif" alt="Imagen 1">
+                <img src="img/v1.jfif" alt="Imagen 2">
+                <img src="img/v2.webp" alt="Imagen 3">
+                <img src="img/v3.webp" alt="Imagen 4">
+                <img src="img/v4.webp" alt="Imagen 5">
+                <img src="img/v5.webp" alt="Imagen 6">
+                <img src="img/v6.jfif" alt="Imagen 7">
+                <img src="img/v7.jfif" alt="Imagen 8">
+                <img src="img/v8.jfif" alt="Imagen 9">
+                <img src="img/v9.jfif" alt="Imagen 10">
+            </div>
+
+            <button class="flecha flecha-der" id="btn-next">&#10095;</button>
+        </section>
+
+        <main>
+            <h2>¿Por qué lo es?</h2>
+            <p> Es mi libro favorito porque relata como una persona que no se siente digna de ser un humano, que no comprende a los demás, muestra de una perspectiva diferente las realidades de la sociedad, los comportamientos y demás. </p>
+        </main>
+
+        <footer>
+            <p> CREADO POR: Xiomara Valencia Mosquera. </p>
+            <p>ALIAS: Xiaomi</p>
+        </footer>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+    <script>
+        
+        const SUPABASE_URL = "https://hypxybgvxvpwfqflijty.supabase.co";
+        const SUPABASE_KEY = "sb_publishable_x6A2XiGzM9F2Qlk9xwBUvA_UK3HoJJz";
+        const clienteSupabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        const pantallaLogin = document.getElementById("pantalla-login");
+        const contenido = document.getElementById("contenido");
+        const formLogin = document.getElementById("form-login");
+        const formRegistro = document.getElementById("form-registro");
+        const mensaje = document.getElementById("mensaje");
+        const enlaceCambiar = document.getElementById("enlace-cambiar");
+        const textoCambiar = document.getElementById("texto-cambiar");
+        const subtitulo = document.getElementById("subtitulo");
+
+        function mostrarMensaje(texto, tipo) {
+            mensaje.innerText = texto;
+            mensaje.className = "mensaje " + tipo;
+        }
+
+        function leerError(error) {
+            const texto = (error.message || "").toLowerCase();
+            if (texto.includes("invalid login credentials")) return "Correo o contraseña incorrectos.";
+            if (texto.includes("email not confirmed")) return "Debes confirmar tu correo antes de entrar. Revisa tu bandeja de entrada.";
+            if (texto.includes("already registered") || texto.includes("already been registered")) return "Ese correo ya tiene una cuenta. Inicia sesión.";
+            if (texto.includes("password should be at least")) return "La contraseña debe tener mínimo 6 caracteres.";
+            if (texto.includes("rate limit") || texto.includes("too many")) return "Demasiados intentos. Espera un momento e inténtalo de nuevo.";
+            if (texto.includes("failed to fetch") || texto.includes("network")) return "No se pudo conectar con la base de datos. Revisa tu internet.";
+            return "No se pudo completar la acción: " + error.message;
+        }
+
+        async function mostrarSegunSesion() {
+            const { data } = await clienteSupabase.auth.getSession();
+
+            const barraVieja = document.querySelector(".barra-sesion");
+            if (barraVieja) barraVieja.remove();
+
+            if (!data.session) {
+                pantallaLogin.classList.remove("oculto");
+                contenido.classList.add("oculto");
+                return;
+            }
+
+            pantallaLogin.classList.add("oculto");
+            contenido.classList.remove("oculto");
+
+            const usuario = data.session.user;
+            const nombre = (usuario.user_metadata && usuario.user_metadata.nombre) || usuario.email;
+
+            const barra = document.createElement("div");
+            barra.className = "barra-sesion";
+            barra.innerHTML = '<span></span><button id="btn-salir">Cerrar sesión</button>';
+            barra.querySelector("span").textContent = "Hola, " + nombre;
+            document.body.appendChild(barra);
+
+            document.getElementById("btn-salir").addEventListener("click", async function () {
+                await clienteSupabase.auth.signOut();
+                mostrarSegunSesion();
+            });
+        }
+
+        mostrarSegunSesion();
     
+        let modoRegistro = false;
+        enlaceCambiar.addEventListener("click", function (e) {
+            e.preventDefault();
+            modoRegistro = !modoRegistro;
+            formLogin.classList.toggle("oculto", modoRegistro);
+            formRegistro.classList.toggle("oculto", !modoRegistro);
+            textoCambiar.innerText = modoRegistro ? "¿Ya tienes cuenta?" : "¿No tienes cuenta?";
+            enlaceCambiar.innerText = modoRegistro ? "Inicia sesión" : "Regístrate";
+            subtitulo.innerText = modoRegistro ? "Crea tu cuenta" : "Inicia sesión para continuar";
+            mostrarMensaje("", "");
+        });
+
+        formLogin.addEventListener("submit", async function (e) {
+            e.preventDefault();
+            const correo = document.getElementById("login-correo").value.trim();
+            const password = document.getElementById("login-clave").value;
+
+            const boton = formLogin.querySelector("button[type=submit]");
+            boton.disabled = true;
+            boton.innerText = "Entrando...";
+
+            const { data, error } = await clienteSupabase.auth.signInWithPassword({
+                email: correo,
+                password: password
+            });
+
+            boton.disabled = false;
+            boton.innerText = "Entrar";
+            console.log("Respuesta de login:", data, error);
+
+            if (error) {
+                mostrarMensaje(leerError(error), "error");
+                return;
+            }
+
+            formLogin.reset();
+            mostrarMensaje("", "");
+            mostrarSegunSesion();
+        });
+
+       
+        formRegistro.addEventListener("submit", async function (e) {
+            e.preventDefault();
+            const nombre = document.getElementById("registro-nombre").value.trim();
+            const correo = document.getElementById("registro-correo").value.trim();
+            const password = document.getElementById("registro-clave").value;
+
+            const boton = formRegistro.querySelector("button[type=submit]");
+            boton.disabled = true;
+            boton.innerText = "Creando cuenta...";
+
+            const { data, error } = await clienteSupabase.auth.signUp({
+                email: correo,
+                password: password,
+                options: { data: { nombre: nombre } }
+            });
+
+            boton.disabled = false;
+            boton.innerText = "Crear cuenta";
+            console.log("Respuesta de registro:", data, error);
+
+            if (error) {
+                mostrarMensaje(leerError(error), "error");
+                return;
+            }
+
+            if (data.session) {
+                formRegistro.reset();
+                mostrarSegunSesion();
+            } else {
+                mostrarMensaje("Cuenta creada. Revisa tu correo para confirmarla y luego inicia sesión.", "exito");
+                formRegistro.reset();
+            }
+        });
+    </script>
+
+    <script src="Java.js"></script>
+
 </body>
 </html>
