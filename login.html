@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body class="pagina-login">
+
+    <main class="tarjeta-login">
+        <h1>MI LIBRO FAVORITO</h1>
+        <p class="subtitulo" id="subtitulo">Inicia sesión para continuar</p>
+
+        <form id="form-login">
+            <label for="login-correo">Correo</label>
+            <input type="email" id="login-correo" placeholder="tucorreo@ejemplo.com" required autocomplete="email">
+
+            <label for="login-clave">Contraseña</label>
+            <input type="password" id="login-clave" placeholder="Tu contraseña" required autocomplete="current-password">
+
+            <button type="submit">Entrar</button>
+        </form>
+
+        <form id="form-registro" class="oculto">
+            <label for="registro-nombre">Nombre</label>
+            <input type="text" id="registro-nombre" placeholder="Tu nombre" required autocomplete="name">
+
+            <label for="registro-correo">Correo</label>
+            <input type="email" id="registro-correo" placeholder="tucorreo@ejemplo.com" required autocomplete="email">
+
+            <label for="registro-clave">Contraseña (mínimo 6 caracteres)</label>
+            <input type="password" id="registro-clave" placeholder="Crea una contraseña" minlength="6" required autocomplete="new-password">
+
+            <button type="submit">Crear cuenta</button>
+        </form>
+
+        <p id="mensaje" class="mensaje"></p>
+
+        <p class="cambiar">
+            <span id="texto-cambiar">¿No tienes cuenta?</span>
+            <a href="#" id="enlace-cambiar">Regístrate</a>
+        </p>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+    <script src="config.js"></script>
+    <script src="login.js"></script>
+</body>
+</html>
